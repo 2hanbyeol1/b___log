@@ -16,17 +16,8 @@ export const metadata: Metadata = {
   title: "별로그",
   description: "경험, 생각, 새로운 IT 지식을 정리해서 공유합니다.",
   openGraph: {
-    type: "website",
     title: "별로그",
     description: "경험, 생각, 새로운 IT 지식을 정리해서 공유합니다.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "별로그",
-      },
-    ],
   },
 };
 

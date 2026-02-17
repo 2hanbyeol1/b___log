@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post?.title ?? "별로그",
     description: post?.summary ?? "포스트를 찾을 수 없습니다",
     openGraph: {
-      images: post?.thumbnail ?? "/og-image.png",
+      images: post?.thumbnail.url,
     },
   };
 }

@@ -5,6 +5,8 @@ import { fetchChildBlocksById } from "@/utils/notion/fetch-item";
 
 import BulletedList from "./list/bulleted-list";
 import BulletedListItem from "./list/bulleted-list-item";
+import NumberedList from "./list/numbered-list";
+import NumberedListItem from "./list/numbered-list-item";
 import TableData from "./table/TableData";
 import TableRow from "./table/TableRow";
 import Callout from "./callout";
@@ -38,6 +40,9 @@ async function WrapperBlock({
   switch (blockType) {
     case "bulleted_list_item":
       WrapperElement = BulletedList;
+      break;
+    case "numbered_list_item":
+      WrapperElement = NumberedList;
       break;
   }
 
@@ -78,6 +83,8 @@ async function Block({ block }: BlockProps) {
       );
     case "bulleted_list_item":
       return <BulletedListItem block={block}>{children}</BulletedListItem>;
+    case "numbered_list_item":
+      return <NumberedListItem block={block}>{children}</NumberedListItem>;
     case "image":
       if (block.has_children)
         throw new Error(`Unexpected Item: ${block} is image, but has children`);
@@ -137,6 +144,7 @@ async function Blocks({ blockId }: BlocksProps) {
   childBlocks.forEach((childBlock) => {
     switch (childBlock.type) {
       case "bulleted_list_item":
+      case "numbered_list_item":
         list.push(<Block key={childBlock.id} block={childBlock} />);
         listType = childBlock.type;
         return;

@@ -13,32 +13,15 @@ async function downloadImage(
   const res = await fetch(url);
   const buffer = await res.arrayBuffer();
 
-  fs.writeFileSync(
-    path.join(process.cwd(), folderPath, filePath),
-    Buffer.from(buffer),
-  );
+  const fullPath = path.join(process.cwd(), folderPath, filePath);
+  fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+  fs.writeFileSync(fullPath, Buffer.from(buffer));
 }
 
 const THUMBNAIL_FOLDER_PATH = "/image/thumbnail";
 
 async function main() {
   const posts = await fetchAllBlogPostList();
-
-  posts.map(async (post) => {
-    await downloadImage(
-      post.thumbnail.url,
-      "public" + THUMBNAIL_FOLDER_PATH,
-      `${post.id}.png`,
-    );
-
-    return {
-      ...post,
-      thumbnail: {
-        ...post.thumbnail,
-        url: `${THUMBNAIL_FOLDER_PATH}/${post.id}.png`,
-      },
-    };
-  });
 
   for (const post of posts) {
     await downloadImage(
@@ -49,7 +32,9 @@ async function main() {
     post.thumbnail.url = `${THUMBNAIL_FOLDER_PATH}/${post.id}.png`;
   }
 
-  fs.writeFileSync("./public/data/posts.json", JSON.stringify(posts, null, 2));
+  const postsPath = path.join(process.cwd(), "public/data/posts.json");
+  fs.mkdirSync(path.dirname(postsPath), { recursive: true });
+  fs.writeFileSync(postsPath, JSON.stringify(posts, null, 2));
 }
 
 main();

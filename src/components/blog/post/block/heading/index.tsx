@@ -5,6 +5,7 @@ import {
   Heading3BlockObjectResponse,
   RichTextItemResponse,
 } from "@notionhq/client";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 
@@ -19,27 +20,33 @@ interface HeadingProps extends PropsWithChildren {
   richText: RichTextItemResponse[];
 }
 
+const headingVariants = cva(
+  "mb-4 font-semibold [&:where(h1)]:mt-14 [&:where(h1,h2,h3)+:where(h1,h2,h3)]:mt-0 [&:where(h2)]:mt-14 [&:where(h3)]:mt-6",
+  {
+    variants: {
+      blockType: {
+        heading_1: "text-3xl",
+        heading_2: "text-2xl",
+        heading_3: "text-xl",
+      },
+    },
+  },
+);
+
 function Heading({ className, block, richText, children }: HeadingProps) {
-  const Component = (() => {
+  const Element = (() => {
     if (block.type === "heading_1") return "h1";
     if (block.type === "heading_2") return "h2";
     return "h3";
   })();
 
   return (
-    <Component
-      className={cn(
-        "mb-4 font-semibold",
-        "[&:where(h1)]:mt-14 [&:where(h1,h2,h3)+:where(h1,h2,h3)]:mt-0 [&:where(h2)]:mt-14 [&:where(h3)]:mt-6",
-        block.type === "heading_1" && "text-3xl",
-        block.type === "heading_2" && "text-2xl",
-        block.type === "heading_3" && "text-xl",
-        className,
-      )}
+    <Element
+      className={cn(headingVariants({ blockType: block.type }), className)}
     >
       <RichText id={block.id} richText={richText} />
       {children}
-    </Component>
+    </Element>
   );
 }
 

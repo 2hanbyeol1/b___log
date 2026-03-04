@@ -9,6 +9,7 @@ import TableData from "./table/TableData";
 import TableRow from "./table/TableRow";
 import Callout from "./callout";
 import Code from "./code";
+import Divider from "./divider";
 import Heading from "./heading";
 import ImageBlock from "./image-block";
 import Paragraph from "./paragraph";
@@ -122,6 +123,8 @@ async function Block({ block }: BlockProps) {
           {children}
         </Toggle>
       );
+    case "divider":
+      return <Divider className="my-6" />;
     default:
       console.error("아직 처리되지 않은 블럭", block);
       return children;

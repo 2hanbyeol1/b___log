@@ -53,12 +53,15 @@ function Heading({ className, block, richText, children }: HeadingProps) {
         className,
       )}
     >
-      <CopyTrigger value={id} isUrl successMessage={`링크가 복사됐어요!`}>
-        <div className="flex items-center gap-2">
-          <RichText id={block.id} richText={richText} />
-          {children}
-          <Link className="hidden stroke-gray-400 group-hover/heading:block" />
-        </div>
+      <CopyTrigger
+        className="flex items-center gap-2"
+        value={id}
+        isUrl
+        successMessage={`링크가 복사됐어요!`}
+      >
+        <RichText id={block.id} richText={richText} />
+        {children}
+        <Link className="hidden stroke-gray-400 group-hover/heading:block" />
       </CopyTrigger>
     </Element>
   );

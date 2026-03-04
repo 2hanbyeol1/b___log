@@ -5,6 +5,8 @@ import TableOfContents from "@/components/blog/post/table-of-contents";
 import { fetchHeadingBlocksByPageId } from "@/utils/notion/fetch-item";
 import { getAllBlogPostList } from "@/utils/notion/get-item";
 
+import ShareButton from "./share-button";
+
 async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const headings = await fetchHeadingBlocksByPageId(id);
@@ -12,6 +14,10 @@ async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className="text-gray-800">
       <Blocks blockId={id} />
+
+      <div className="mt-28 flex justify-end">
+        <ShareButton />
+      </div>
 
       {headings.length > 0 && (
         <aside className="fixed right-6 bottom-6">

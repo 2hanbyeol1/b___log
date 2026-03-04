@@ -2,8 +2,10 @@
 import { PropsWithChildren } from "react";
 
 import { useToast } from "@/lib/hooks/context/useToast";
+import { cn } from "@/utils/cn";
 
 interface CopyTriggerProps extends PropsWithChildren {
+  className?: string;
   value: string;
   isUrl?: boolean;
   successMessage?: string;
@@ -11,6 +13,7 @@ interface CopyTriggerProps extends PropsWithChildren {
 }
 
 function CopyTrigger({
+  className,
   value,
   children,
   isUrl = false,
@@ -44,7 +47,7 @@ function CopyTrigger({
   };
 
   return (
-    <button className="cursor-pointer" onClick={handleClick}>
+    <button className={cn("cursor-pointer", className)} onClick={handleClick}>
       {children}
     </button>
   );

@@ -14,7 +14,7 @@ function Quote({ className, block, children }: QuoteProps) {
   return (
     <blockquote
       className={cn(
-        "border-l-3 border-gray-300 py-1 pl-6 whitespace-pre-wrap",
+        "border-l-3 border-gray-300 py-2 pl-6 text-lg whitespace-pre-wrap",
         className,
       )}
     >

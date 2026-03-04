@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useContext, useState } from "react";
 
-import Toast from "@/components/common/toast";
+import ToastList from "@/components/common/toast/list";
 import {
   AddToastProps,
   DEFAULT_DURATION,
@@ -44,11 +44,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}
 
-      <div className="fixed bottom-4 left-1/2 flex -translate-x-1/2 flex-col gap-2">
-        {toasts.map((toast) => (
-          <Toast key={toast.id} toast={toast} />
-        ))}
-      </div>
+      <ToastList />
     </ToastContext.Provider>
   );
 }

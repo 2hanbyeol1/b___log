@@ -8,9 +8,6 @@ export function getRequiredEnv(key: string): string {
   const value = process.env[key];
 
   if (!value || value.trim() === "") {
-    console.log({ window, key });
-    console.trace();
-
     throw new EnvMissingError(key);
   }
 

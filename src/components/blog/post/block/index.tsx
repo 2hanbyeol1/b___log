@@ -3,10 +3,8 @@ import { BlockObjectResponse } from "@notionhq/client";
 
 import { fetchChildBlocksById } from "@/utils/notion/fetch-item";
 
-import BulletedList from "./list/bulleted-list";
-import BulletedListItem from "./list/bulleted-list-item";
-import NumberedList from "./list/numbered-list";
-import NumberedListItem from "./list/numbered-list-item";
+import List from "./list/bulleted-list";
+import ListItem from "./list/list-item";
 import TableData from "./table/TableData";
 import TableRow from "./table/TableRow";
 import Callout from "./callout";
@@ -39,14 +37,12 @@ async function WrapperBlock({
 
   switch (blockType) {
     case "bulleted_list_item":
-      WrapperElement = BulletedList;
-      break;
     case "numbered_list_item":
-      WrapperElement = NumberedList;
+      WrapperElement = List;
       break;
   }
 
-  return <WrapperElement>{children}</WrapperElement>;
+  return <WrapperElement blockType={blockType}>{children}</WrapperElement>;
 }
 
 async function Block({ block }: BlockProps) {
@@ -82,13 +78,11 @@ async function Block({ block }: BlockProps) {
         </Paragraph>
       );
     case "bulleted_list_item":
-      return <BulletedListItem block={block}>{children}</BulletedListItem>;
     case "numbered_list_item":
-      return <NumberedListItem block={block}>{children}</NumberedListItem>;
+      return <ListItem block={block}>{children}</ListItem>;
     case "image":
       if (block.has_children)
         throw new Error(`Unexpected Item: ${block} is image, but has children`);
-
       return <ImageBlock className="mt-6 mb-2" block={block} />;
     case "code":
       return (

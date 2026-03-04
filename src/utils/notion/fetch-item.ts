@@ -71,3 +71,55 @@ export async function fetchChildBlocksById(id: string) {
 
   return results.filter((block) => isFullBlock(block));
 }
+
+export type HeadingItem = {
+  id: string;
+  type: "heading_1" | "heading_2" | "heading_3";
+  text: string;
+};
+
+async function collectHeadings(blockId: string): Promise<HeadingItem[]> {
+  const blocks = await fetchChildBlocksById(blockId);
+  const headings: HeadingItem[] = [];
+
+  for (const block of blocks) {
+    switch (block.type) {
+      case "heading_1":
+        headings.push({
+          id: block.id,
+          type: "heading_1",
+          text: block.heading_1.rich_text.map((t) => t.plain_text).join(""),
+        });
+        break;
+      case "heading_2":
+        headings.push({
+          id: block.id,
+          type: "heading_2",
+          text: block.heading_2.rich_text.map((t) => t.plain_text).join(""),
+        });
+        break;
+      case "heading_3":
+        headings.push({
+          id: block.id,
+          type: "heading_3",
+          text: block.heading_3.rich_text.map((t) => t.plain_text).join(""),
+        });
+        break;
+      default:
+        break;
+    }
+
+    if (block.has_children) {
+      const childHeadings = await collectHeadings(block.id);
+      headings.push(...childHeadings);
+    }
+  }
+
+  return headings;
+}
+
+export async function fetchHeadingBlocksByPageId(
+  pageId: string,
+): Promise<HeadingItem[]> {
+  return collectHeadings(pageId);
+}

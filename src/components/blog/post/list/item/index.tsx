@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PATH } from "@/lib/constants/path";
-import { BlogPost } from "@/lib/types/blog";
+import { BlogPost } from "@/lib/types/post";
 
 import Tag from "./tag";
 import Thumbnail from "./thumbnail";

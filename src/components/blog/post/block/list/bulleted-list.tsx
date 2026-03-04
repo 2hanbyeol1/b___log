@@ -9,7 +9,7 @@ interface ListProps
   blockType: "bulleted_list_item" | "numbered_list_item";
 }
 
-const listVariants = cva("mt-6 mb-2 list-disc pl-5 text-lg", {
+const listVariants = cva("mt-6 mb-2 list-disc pl-6 text-lg", {
   variants: {
     blockType: {
       bulleted_list_item: "list-disc [&_ul]:mt-2",

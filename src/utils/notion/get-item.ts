@@ -1,4 +1,4 @@
-import { BlogPost } from "@/lib/types/blog";
+import { BlogPost } from "@/lib/types/post";
 
 import posts from "../../../public/data/posts.json";
 import { normalizeString } from "../str";

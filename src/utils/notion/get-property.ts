@@ -1,6 +1,6 @@
 import { PageObjectResponse } from "@notionhq/client";
 
-import { BlogPost } from "@/lib/types/blog";
+import { BlogPost } from "@/lib/types/post";
 
 export const getPostPageProperties = (
   property: PageObjectResponse["properties"],

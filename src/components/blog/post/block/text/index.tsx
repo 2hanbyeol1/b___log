@@ -15,6 +15,7 @@ interface TextProps {
 function Text({ className, text, as: Component = "span" }: TextProps) {
   const commonClassName = cn(
     text.annotations.bold && "font-semibold bg-primary/10 px-0.5",
+    "text-start",
     className,
   );
 

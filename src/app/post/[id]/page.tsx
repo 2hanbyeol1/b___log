@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Blocks from "@/components/blog/post/block";
 import TableOfContents from "@/components/blog/post/table-of-contents";
+import { cn } from "@/utils/cn";
 import { fetchHeadingBlocksByPageId } from "@/utils/notion/fetch-item";
 import { getAllBlogPostList } from "@/utils/notion/get-item";
 
@@ -12,7 +13,7 @@ async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const headings = await fetchHeadingBlocksByPageId(id);
 
   return (
-    <div className="text-gray-800">
+    <div className="relative flex flex-col text-gray-800">
       <Blocks blockId={id} />
 
       <div className="mt-28 flex justify-end">
@@ -20,8 +21,15 @@ async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
       </div>
 
       {headings.length > 0 && (
-        <aside className="fixed right-6 bottom-6">
-          <TableOfContents headings={headings} />
+        <aside
+          className={cn(
+            "fixed right-4 bottom-4 h-fit w-fit",
+            "laptop:top-0 laptop:left-[calc(100%+20px)] laptop:absolute laptop:h-full laptop:w-full laptop:max-w-[calc((100vw-920px)/2-2rem)]",
+          )}
+        >
+          <div className="sticky top-24">
+            <TableOfContents headings={headings} />
+          </div>
         </aside>
       )}
     </div>

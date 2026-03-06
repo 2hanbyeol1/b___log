@@ -8,6 +8,7 @@
     --breakpoint-mobile: 480px;
     --breakpoint-tablet: 768px;
     --breakpoint-laptop: 1281px;
+    --breakpoint-desktop: 1440px;
 }
 
 body {

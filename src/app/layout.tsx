@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import Header from "@/components/common/header";
 import { ModalProvider } from "@/lib/hooks/context/useModal";
+import { ToastProvider } from "@/lib/hooks/context/useToast";
 
 import "./globals.css";
 
@@ -30,10 +31,12 @@ export default function RootLayout({
     <html lang="ko" className={`${pretendard.variable}`}>
       <body className="font-pretendard">
         <ModalProvider>
-          <Header className="h-18 px-4" />
-          <div id="0" className="pt-18">
-            {children}
-          </div>
+          <ToastProvider>
+            <Header className="h-18 px-4" />
+            <div id="0" className="pt-18">
+              {children}
+            </div>
+          </ToastProvider>
         </ModalProvider>
       </body>
     </html>

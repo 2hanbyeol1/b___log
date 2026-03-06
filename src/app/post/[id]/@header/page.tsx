@@ -15,7 +15,7 @@ async function BlogPostHeader({ params }: { params: Promise<{ id: string }> }) {
   const { title, created_at, tags } = post;
 
   return (
-    <header className="mb-24">
+    <header className="tablet:mb-24 mb-12">
       {/* 제목 */}
       <h1 className="mb-5 text-4xl font-semibold">{title}</h1>
 

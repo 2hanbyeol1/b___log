@@ -4,7 +4,7 @@ import Skeleton from "@/components/common/skeleton";
 
 function BlogPostHeaderLoading() {
   return (
-    <div className="mb-24">
+    <div className="tablet:mb-24 mb-12">
       {/* 제목 */}
       <Skeleton className="mb-5 max-w-96 font-semibold" fontSize="4xl" />
 

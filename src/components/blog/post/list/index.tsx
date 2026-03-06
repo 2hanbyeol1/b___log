@@ -1,5 +1,5 @@
 import BlogListItem from "@/components/blog/post/list/item";
-import { BlogPost } from "@/lib/types/blog";
+import { BlogPost } from "@/lib/types/post";
 
 interface PostListProps {
   posts: BlogPost[];

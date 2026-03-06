@@ -1,7 +1,7 @@
 import Tag from "@/components/blog/post/list/item/tag";
 import Button from "@/components/common/button";
 import { PATH } from "@/lib/constants/path";
-import { BlogPost } from "@/lib/types/blog";
+import { BlogPost } from "@/lib/types/post";
 
 interface TagListProps {
   tags: BlogPost["tags"][number][];

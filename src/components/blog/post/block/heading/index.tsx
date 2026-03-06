@@ -6,7 +6,9 @@ import {
   RichTextItemResponse,
 } from "@notionhq/client";
 import { cva } from "class-variance-authority";
+import { Link } from "lucide-react";
 
+import CopyTrigger from "@/components/common/copy-trigger";
 import { cn } from "@/utils/cn";
 
 import RichText from "../text/rich-text";
@@ -21,7 +23,7 @@ interface HeadingProps extends PropsWithChildren {
 }
 
 const headingVariants = cva(
-  "mb-4 font-semibold [&:where(h1)]:mt-14 [&:where(h1,h2,h3)+:where(h1,h2,h3)]:mt-0 [&:where(h2)]:mt-14 [&:where(h3)]:mt-6",
+  "scroll-mt-24 mb-4 font-semibold [&:where(h1)]:mt-16 [&:where(h1,h2,h3)+:where(h1,h2,h3)]:mt-0 [&:where(h2)]:mt-14 [&:where(h3)]:mt-12",
   {
     variants: {
       blockType: {
@@ -40,12 +42,27 @@ function Heading({ className, block, richText, children }: HeadingProps) {
     return "h3";
   })();
 
+  const id = richText.map((text) => text.plain_text).join("");
+
   return (
     <Element
-      className={cn(headingVariants({ blockType: block.type }), className)}
+      id={id}
+      className={cn(
+        headingVariants({ blockType: block.type }),
+        "group/heading",
+        className,
+      )}
     >
-      <RichText id={block.id} richText={richText} />
-      {children}
+      <CopyTrigger
+        className="flex items-center gap-2"
+        value={id}
+        isUrl
+        successMessage={`링크가 복사됐어요!`}
+      >
+        <RichText id={block.id} richText={richText} />
+        {children}
+        <Link className="hidden stroke-gray-400 group-hover/heading:block" />
+      </CopyTrigger>
     </Element>
   );
 }

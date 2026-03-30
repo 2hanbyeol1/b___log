@@ -4,6 +4,8 @@ import { PATH } from "@/lib/constants/path";
 import { getRequiredEnv } from "@/utils/env";
 import { getAllBlogPostList, getAllTags } from "@/utils/notion/get-item";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getRequiredEnv("NEXT_PUBLIC_SITE_URL");
   const posts = getAllBlogPostList();

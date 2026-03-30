@@ -16,6 +16,12 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "별로그",
   description: "경험, 생각, 새로운 IT 지식을 정리해서 공유합니다.",
+  verification: {
+    google: "J_oaP0Pd9UNMiSTbiqkijZvP8X1S75HWKQtj_NKy3Jg",
+    other: {
+      "naver-site-verification": "0d56f7c5f693b5f7f57bd2b3df32ed801d4d50eb",
+    },
+  },
   openGraph: {
     title: "별로그",
     description: "경험, 생각, 새로운 IT 지식을 정리해서 공유합니다.",
